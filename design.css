@@ -1,0 +1,42 @@
+li{
+    margin-top:2%;
+    list-style-type: none;
+    font-family: 'Exo 2', sans-serif;
+    
+}
+
+a{
+    text-decoration: none;
+    color:#9fef00;
+    
+}
+
+ul{
+    margin-top: 2%;
+    width:40%;
+}
+
+body{
+    background-color: #141d2b;
+}
+
+header{
+    text-align: center;
+    font-size:60px;
+    color:#9fef00;
+}
+
+
+
+.Blog{
+    color:#a4b1cd;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Exo 2', sans-serif;
+    font-size:18px
+}
+
