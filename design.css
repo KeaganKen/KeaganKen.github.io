@@ -44,6 +44,11 @@ header{
     header{
         font-size:30px;
     }
+    #nav-expand:focus ~ main {
+      margin-left: 30%;
+      transition-delay: .25s;
+      font-size:5px;
+    }
   
 }
 
@@ -103,11 +108,7 @@ nav {
     opacity: 0;
   }
   
-  #nav-expand:focus ~ main {
-    margin-left: 30%;
-    transition-delay: .25s;
-    font-size:5px;
-  }
+
   
   #nav-expand:focus ~ nav {
     left: 0;
