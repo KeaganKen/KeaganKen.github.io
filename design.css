@@ -25,6 +25,7 @@ header{
     text-align: center;
     font-size:60px;
     color:#9fef00;
+    font-family: BoldFont;
 }
 
 
@@ -136,10 +137,21 @@ nav {
 img{
     
  width:60px;
- height:80px;
+ height:60px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  margin-top: 10%;
+  display: inline;
+  padding:10px;
 }
 
+.container{
+  text-align: center;
+}
+
+@font-face {
+  font-family: BoldFont;
+  src: url("THE\ BOLD\ FONT\ -\ FREE\ VERSION\ -\ 2023.otf");
+  src: url("THE\ BOLD\ FONT\ -\ FREE\ VERSION\ -\ 2023.ttf");
+}
