@@ -1,7 +1,11 @@
 import React from 'react';
 import { Globe, Book, CheckCircle, Search, ChevronRight } from 'lucide-react';
 
-const Home = () => {
+const Home = ({ setActiveTab }) => {
+  const handleCardClick = (tabName) => {
+    setActiveTab(tabName);
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -13,17 +17,15 @@ const Home = () => {
           Discover archaeological findings, historical documentation, scientific correlations, 
           and prophetic fulfillments that support the accuracy and reliability of biblical accounts.
         </p>
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-3xl mx-auto">
-          <p className="text-blue-800 font-medium">
-            "Heaven and earth will pass away, but my words will never pass away." - Matthew 24:35
-          </p>
-        </div>
       </div>
 
       {/* Features Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        {/* Biblical Evidence Card */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow">
+        {/* Biblical Evidence Card - CLICKABLE */}
+        <div 
+          onClick={() => handleCardClick('evidence')}
+          className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer transform hover:scale-105"
+        >
           <div className="flex items-center space-x-3 mb-4">
             <div className="bg-blue-100 p-2 rounded-lg">
               <Globe className="w-6 h-6 text-blue-600" />
@@ -48,14 +50,17 @@ const Home = () => {
               <span>Scientific Correlations</span>
             </div>
           </div>
-          <button className="flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700">
+          <div className="flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700">
             <span>Explore Evidence</span>
             <ChevronRight className="w-4 h-4" />
-          </button>
+          </div>
         </div>
 
-        {/* End Times Signs Card */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow">
+        {/* End Times Signs Card - CLICKABLE */}
+        <div 
+          onClick={() => handleCardClick('endtimes')}
+          className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer transform hover:scale-105"
+        >
           <div className="flex items-center space-x-3 mb-4">
             <div className="bg-purple-100 p-2 rounded-lg">
               <Book className="w-6 h-6 text-purple-600" />
@@ -80,14 +85,17 @@ const Home = () => {
               <span>Society & Morality</span>
             </div>
           </div>
-          <button className="flex items-center space-x-2 text-purple-600 font-medium hover:text-purple-700">
+          <div className="flex items-center space-x-2 text-purple-600 font-medium hover:text-purple-700">
             <span>View Signs</span>
             <ChevronRight className="w-4 h-4" />
-          </button>
+          </div>
         </div>
 
-        {/* Current Events Card */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow">
+        {/* Current Events Card - CLICKABLE */}
+        <div 
+          onClick={() => handleCardClick('events')}
+          className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer transform hover:scale-105"
+        >
           <div className="flex items-center space-x-3 mb-4">
             <div className="bg-red-100 p-2 rounded-lg">
               <Globe className="w-6 h-6 text-red-600" />
@@ -112,10 +120,10 @@ const Home = () => {
               <span>Strange Phenomena & Global Conflicts</span>
             </div>
           </div>
-          <button className="flex items-center space-x-2 text-red-600 font-medium hover:text-red-700">
+          <div className="flex items-center space-x-2 text-red-600 font-medium hover:text-red-700">
             <span>Monitor Events</span>
             <ChevronRight className="w-4 h-4" />
-          </button>
+          </div>
         </div>
       </div>
 
@@ -158,7 +166,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
