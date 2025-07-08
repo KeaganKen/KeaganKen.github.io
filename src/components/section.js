@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronDown, ChevronRight, Book, CheckCircle, Clock, AlertTriangle, ExternalLink } from 'lucide-react';
 
-const Section = ({ data, type, expandedSections, toggleSection, searchTerm, navigate }) => {
+const Section = ({ data, type, expandedSections, toggleSection, searchTerm }) => {
+  const navigate = useNavigate();
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -30,12 +32,42 @@ const Section = ({ data, type, expandedSections, toggleSection, searchTerm, navi
     }
   };
 
+  // Map titles to specific page URLs
+  const getPageUrl = (title) => {
+    const titleMap = {
+      // Evidence pages
+      "Dead Sea Scrolls Discovery": "/dead-sea-scrolls",
+      "Hezekiah's Tunnel": "/hezekiahs-tunnel", 
+      "Pontius Pilate Inscription": "/pontius-pilate-inscription",
+      
+      // End times pages
+      "Israel's Rebirth as a Nation": "/israel-rebirth",
+      "Jerusalem Under Jewish Control": "/jerusalem-control",
+      "Hebrew Language Revival": "/hebrew-revival",
+      
+      // Events pages
+      "Increase in Earthquake Frequency": "/earthquake-frequency",
+      "Record-Breaking Floods": "/record-floods",
+      "Devastating Wildfires Worldwide": "/devastating-wildfires",
+      "Ongoing Regional Conflicts": "/regional-conflicts"
+    };
+    
+    console.log("Looking for title:", title);
+    console.log("Found URL:", titleMap[title]);
+    
+    return titleMap[title] || null;
+  };
+
   const handleItemClick = (item, sectionId) => {
-    // Only Dead Sea Scrolls has a page for now
-    if (item.title === "Dead Sea Scrolls Discovery" && navigate) {
-      navigate("/dead-sea-scrolls");
+    const pageUrl = getPageUrl(item.title);
+    
+    console.log("pageUrl:", pageUrl);
+    console.log("navigate function:", navigate);
+    
+    if (pageUrl && navigate) {
+      navigate(pageUrl);
     } else {
-      // Show alert for others until you create their pages
+      // Fallback: show alert if no specific page exists yet
       alert(`Page for "${item.title}" coming soon!\n\n${item.description}`);
     }
   };
@@ -97,7 +129,7 @@ const Section = ({ data, type, expandedSections, toggleSection, searchTerm, navi
                     <p className="text-xs text-gray-500 mt-1">Source: {item.source}</p>
                   )}
                   <div className="mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium">
-                    {item.title === "Dead Sea Scrolls Discovery" ? "Click to read full article →" : "Page coming soon →"}
+                    Click to read full article →
                   </div>
                 </div>
               ))}

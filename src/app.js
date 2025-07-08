@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './app.css';
 import Header from './components/header';
 import Navigation from './components/navigation';
@@ -8,32 +9,65 @@ import Evidence from './pages/evidence';
 import EndTimes from './pages/endtimes';
 import WorldlyEvents from './pages/events';
 
-function App() {
-  const [activeTab, setActiveTab] = useState('home');
-  const [searchTerm, setSearchTerm] = useState('');
+// Only import the one file that exists and has content
+import DeadSeaScrolls from './pages/dead-sea-scrolls';
 
-  const renderContent = () => {
-    switch(activeTab) {
+function AppContent() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Determine active tab based on current route
+  const getActiveTab = () => {
+    const path = location.pathname;
+    if (path.startsWith('/evidence') || path.includes('dead-sea-scrolls')) return 'evidence';
+    if (path.startsWith('/endtimes')) return 'endtimes';
+    if (path.startsWith('/events')) return 'events';
+    return 'home';
+  };
+
+  const setActiveTab = (tab) => {
+    switch(tab) {
       case 'evidence':
-        return <Evidence searchTerm={searchTerm} />;
+        navigate('/evidence');
+        break;
       case 'endtimes':
-        return <EndTimes searchTerm={searchTerm} />;
+        navigate('/endtimes');
+        break;
       case 'events':
-        return <WorldlyEvents searchTerm={searchTerm} />;
+        navigate('/events');
+        break;
       default:
-        return <Home setActiveTab={setActiveTab} />; {/* Pass setActiveTab to Home */}
+        navigate('/');
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {renderContent()}
+      <Navigation activeTab={getActiveTab()} setActiveTab={setActiveTab} />
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <Routes>
+          {/* Main section pages */}
+          <Route path="/" element={<Home setActiveTab={setActiveTab} />} />
+          <Route path="/evidence" element={<Evidence searchTerm={searchTerm} />} />
+          <Route path="/endtimes" element={<EndTimes searchTerm={searchTerm} />} />
+          <Route path="/events" element={<WorldlyEvents searchTerm={searchTerm} />} />
+          
+          {/* Only the Dead Sea Scrolls page for now */}
+          <Route path="/dead-sea-scrolls" element={<DeadSeaScrolls />} />
+        </Routes>
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

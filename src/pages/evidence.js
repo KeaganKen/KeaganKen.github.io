@@ -3,7 +3,7 @@ import Section from '../components/section';
 import { evidenceData } from '../data/evidencedata.js';
 import { Globe, Book, CheckCircle } from 'lucide-react';
 
-const Evidence = ({ searchTerm }) => {
+const Evidence = ({ searchTerm, navigate }) => {  // ← Add navigate here
   const [expandedSections, setExpandedSections] = useState({});
 
   const toggleSection = (sectionId) => {
@@ -22,7 +22,6 @@ const Evidence = ({ searchTerm }) => {
   }));
 
   return (
-    // ONLY CONTENT - NO LAYOUT COMPONENTS!
     <div>
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Evidence for Biblical Truth</h2>
@@ -38,6 +37,7 @@ const Evidence = ({ searchTerm }) => {
         expandedSections={expandedSections}
         toggleSection={toggleSection}
         searchTerm={searchTerm}
+        navigate={navigate}  // ← Add this line
       />
     </div>
   );
