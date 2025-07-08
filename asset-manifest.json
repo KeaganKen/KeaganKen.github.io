@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/heisrisen/static/css/main.c2200418.css",
-    "main.js": "/heisrisen/static/js/main.e10f1865.js",
+    "main.js": "/heisrisen/static/js/main.fc485b16.js",
     "index.html": "/heisrisen/index.html",
     "main.c2200418.css.map": "/heisrisen/static/css/main.c2200418.css.map",
-    "main.e10f1865.js.map": "/heisrisen/static/js/main.e10f1865.js.map"
+    "main.fc485b16.js.map": "/heisrisen/static/js/main.fc485b16.js.map"
   },
   "entrypoints": [
     "static/css/main.c2200418.css",
-    "static/js/main.e10f1865.js"
+    "static/js/main.fc485b16.js"
   ]
 }
