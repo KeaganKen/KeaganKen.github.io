@@ -1,7 +1,8 @@
 import React from 'react';
-import { ChevronDown, ChevronRight, Book, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
+import { ChevronDown, ChevronRight, Book, CheckCircle, Clock, AlertTriangle, ExternalLink } from 'lucide-react';
 
-const Section = ({ data, type, expandedSections, toggleSection, searchTerm }) => {
+const Section = ({ data, type, expandedSections, toggleSection, searchTerm, navigate }) => {
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'verified': return 'bg-green-100 text-green-800';
@@ -26,6 +27,16 @@ const Section = ({ data, type, expandedSections, toggleSection, searchTerm }) =>
         return <AlertTriangle className="w-4 h-4 text-orange-600" />;
       default:
         return <Book className="w-4 h-4 text-gray-600" />;
+    }
+  };
+
+  const handleItemClick = (item, sectionId) => {
+    // Only Dead Sea Scrolls has a page for now
+    if (item.title === "Dead Sea Scrolls Discovery" && navigate) {
+      navigate("/dead-sea-scrolls");
+    } else {
+      // Show alert for others until you create their pages
+      alert(`Page for "${item.title}" coming soon!\n\n${item.description}`);
     }
   };
 
@@ -58,11 +69,18 @@ const Section = ({ data, type, expandedSections, toggleSection, searchTerm }) =>
           {expandedSections[section.id] && (
             <div className="border-t border-gray-200">
               {section.items.map((item, index) => (
-                <div key={index} className="p-4 border-b border-gray-100 last:border-b-0">
+                <div 
+                  key={index} 
+                  className="p-4 border-b border-gray-100 last:border-b-0 cursor-pointer hover:bg-blue-50 transition-colors duration-150"
+                  onClick={() => handleItemClick(item, section.id)}
+                >
                   <div className="flex items-start justify-between mb-2">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 flex-1">
                       {getStatusIcon(item.status)}
-                      <h4 className="font-medium text-gray-900">{item.title}</h4>
+                      <h4 className="font-medium text-gray-900 hover:text-blue-600 flex items-center space-x-2">
+                        <span>{item.title}</span>
+                        <ExternalLink className="w-4 h-4 text-blue-500" />
+                      </h4>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
@@ -75,6 +93,12 @@ const Section = ({ data, type, expandedSections, toggleSection, searchTerm }) =>
                   {item.reference && (
                     <p className="text-sm font-medium text-blue-600">📖 {item.reference}</p>
                   )}
+                  {item.source && (
+                    <p className="text-xs text-gray-500 mt-1">Source: {item.source}</p>
+                  )}
+                  <div className="mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                    {item.title === "Dead Sea Scrolls Discovery" ? "Click to read full article →" : "Page coming soon →"}
+                  </div>
                 </div>
               ))}
             </div>
